@@ -1,0 +1,472 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center py-5 mb-5" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: 15px; padding: 3rem 1rem;">
+    <h1 class="display-4 fw-bold mb-3">Find Your Dream Government Job</h1>
+    <p class="lead mb-4">Discover the latest government jobs, exam results, and admit cards all in one place</p>
+    <form class="d-flex justify-content-center mb-3" method="get" action="/jobs">
+        <div class="input-group" style="max-width: 600px;">
+            <input class="form-control form-control-lg" type="search" name="q" placeholder="Search for jobs, results, admit cards..." aria-label="Search">
+            <button class="btn btn-light btn-lg" type="submit"><i class="fas fa-search me-2"></i>Search</button>
+        </div>
+        </form>
+    <div class="d-flex justify-content-center gap-3">
+        <a href="/jobs" class="btn btn-outline-light"><i class="fas fa-search-dollar me-2"></i>Browse Jobs</a>
+        <a href="/results" class="btn btn-outline-light"><i class="fas fa-poll me-2"></i>View Results</a>
+        <a href="/admit-cards" class="btn btn-outline-light"><i class="fas fa-id-card me-2"></i>Admit Cards</a>
+        <a href="/answer-keys" class="btn btn-outline-light"><i class="fas fa-key me-2"></i>Answer Keys</a>
+        <a href="/syllabus" class="btn btn-outline-light"><i class="fas fa-book me-2"></i>Syllabus</a>
+    </div>
+</div>
+
+<!-- Latest Updates Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="section-title text-center mb-4">Latest Updates</h2>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-briefcase me-2" style="color: var(--secondary-color);"></i>Latest Government Jobs</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="latest-jobs">
+                    <!-- Latest jobs will be dynamically loaded here -->
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Loading jobs...</h6>
+                                <small class="text-muted">Please wait</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-white text-center">
+                <a href="/jobs" class="btn btn-link text-decoration-none">View All Jobs <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-id-card me-2" style="color: var(--secondary-color);"></i>Latest Admit Cards</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="latest-admit-cards">
+                    <!-- Latest admit cards will be dynamically loaded here -->
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Loading admit cards...</h6>
+                                <small class="text-muted">Please wait</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-white text-center">
+                <a href="/admit-cards" class="btn btn-link text-decoration-none">View All Admit Cards <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-poll me-2" style="color: var(--secondary-color);"></i>Latest Exam Results</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="latest-results">
+                    <!-- Latest results will be dynamically loaded here -->
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Loading results...</h6>
+                                <small class="text-muted">Please wait</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-white text-center">
+                <a href="/results" class="btn btn-link text-decoration-none">View All Results <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-key me-2" style="color: var(--secondary-color);"></i>Latest Answer Keys</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="latest-answer-keys">
+                    <!-- Latest answer keys will be dynamically loaded here -->
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Loading answer keys...</h6>
+                                <small class="text-muted">Please wait</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-white text-center">
+                <a href="/answer-keys" class="btn btn-link text-decoration-none">View All Answer Keys <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-book me-2" style="color: var(--secondary-color);"></i>Latest Syllabus</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="latest-syllabus">
+                    <!-- Latest syllabus will be dynamically loaded here -->
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">Loading syllabus...</h6>
+                                <small class="text-muted">Please wait</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">New</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer bg-white text-center">
+                <a href="/syllabus" class="btn btn-link text-decoration-none">View All Syllabus <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Stats -->
+<!-- Temporarily hidden
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-4">
+            <div class="card-body">
+                <i class="fas fa-briefcase fa-3x mb-3" style="color: var(--secondary-color);"></i>
+                <h3 class="card-title h4">Government Jobs</h3>
+                <p class="card-text">Find the latest government job opportunities across various departments</p>
+                <a href="/jobs" class="btn btn-outline-primary mt-2">View Jobs</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-4">
+            <div class="card-body">
+                <i class="fas fa-poll fa-3x mb-3" style="color: var(--secondary-color);"></i>
+                <h3 class="card-title h4">Exam Results</h3>
+                <p class="card-text">Check the latest exam results and merit lists from various government exams</p>
+                <a href="/results" class="btn btn-outline-primary mt-2">View Results</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center p-4">
+            <div class="card-body">
+                <i class="fas fa-id-card fa-3x mb-3" style="color: var(--secondary-color);"></i>
+                <h3 class="card-title h4">Admit Cards</h3>
+                <p class="card-text">Download your admit cards for upcoming government examinations</p>
+                <a href="/admit-cards" class="btn btn-outline-primary mt-2">View Admit Cards</a>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<!-- Important Links Section -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="section-title text-center mb-4">Important Links</h2>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-link me-2" style="color: var(--secondary-color);"></i>Important Websites</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="government-links">
+                    <!-- Government links will be loaded here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0"><i class="fas fa-book me-2" style="color: var(--secondary-color);"></i>Study Resources</h5>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush" id="study-links">
+                    <!-- Study resources will be loaded here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Subscribe Section -->
+<!-- Temporarily hidden
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center p-5" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <h2 class="section-title text-center mb-4">Stay Updated</h2>
+                <p class="lead mb-4">Subscribe to our newsletter to receive the latest job alerts, exam results, and admit card notifications directly in your inbox.</p>
+                <form id="subscribe-form" method="post" action="/subscribe" class="row g-3 justify-content-center">
+                    <div class="col-md-6">
+                        <div class="input-group input-group-lg">
+                            <input type="email" class="form-control" name="email" placeholder="Enter your email address" required>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane me-2"></i>Subscribe</button>
+                    </div>
+                    </div>
+                </form>
+                <div id="subscribe-message" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<script>
+// Function to load latest jobs
+function loadLatestJobs() {
+    fetch('/api/jobs')
+        .then(response => response.json())
+        .then(jobs => {
+            const jobsList = document.getElementById('latest-jobs');
+            jobsList.innerHTML = '';
+            
+            if (jobs.length === 0) {
+                jobsList.innerHTML = '<li class="list-group-item text-center">No jobs available</li>';
+                return;
+            }
+            
+            // Display the latest 10 jobs
+            const latestJobs = jobs.slice(0, 10);
+            latestJobs.forEach(job => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${job.title}</h6>
+                            <small class="text-muted">${job.location} • ${job.eligibility}</small>
+                        </div>
+                        <a href="/jobs/${job._id}" class="btn btn-sm btn-outline-primary">View</a>
+                    </div>
+                `;
+                jobsList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading jobs:', error);
+            document.getElementById('latest-jobs').innerHTML = '<li class="list-group-item text-center text-danger">Error loading jobs</li>';
+        });
+}
+
+// Function to load latest admit cards
+function loadLatestAdmitCards() {
+    fetch('/api/admit-cards')
+        .then(response => response.json())
+        .then(admitCards => {
+            const admitCardsList = document.getElementById('latest-admit-cards');
+            admitCardsList.innerHTML = '';
+            
+            if (admitCards.length === 0) {
+                admitCardsList.innerHTML = '<li class="list-group-item text-center">No admit cards available</li>';
+                return;
+            }
+            
+            // Display the latest 10 admit cards
+            const latestAdmitCards = admitCards.slice(0, 10);
+            latestAdmitCards.forEach(admitCard => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${admitCard.title}</h6>
+                            <small class="text-muted">Published: ${admitCard.date_published || 'N/A'}</small>
+                        </div>
+                        <a href="${admitCard.link}" target="_blank" class="btn btn-sm btn-outline-primary">Download</a>
+                    </div>
+                `;
+                admitCardsList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading admit cards:', error);
+            document.getElementById('latest-admit-cards').innerHTML = '<li class="list-group-item text-center text-danger">Error loading admit cards</li>';
+        });
+}
+
+// Function to load latest results
+function loadLatestResults() {
+    fetch('/api/results')
+        .then(response => response.json())
+        .then(results => {
+            const resultsList = document.getElementById('latest-results');
+            resultsList.innerHTML = '';
+            
+            if (results.length === 0) {
+                resultsList.innerHTML = '<li class="list-group-item text-center">No results available</li>';
+                return;
+            }
+            
+            // Display the latest 10 results
+            const latestResults = results.slice(0, 10);
+            latestResults.forEach(result => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${result.title}</h6>
+                            <small class="text-muted">Published: ${result.date_published || 'N/A'}</small>
+                        </div>
+                        <a href="${result.link}" target="_blank" class="btn btn-sm btn-outline-primary">View</a>
+                    </div>
+                `;
+                resultsList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading results:', error);
+            document.getElementById('latest-results').innerHTML = '<li class="list-group-item text-center text-danger">Error loading results</li>';
+        });
+}
+
+// Function to load latest answer keys
+function loadLatestAnswerKeys() {
+    fetch('/api/answer-keys')
+        .then(response => response.json())
+        .then(data => {
+            const answerKeysList = document.getElementById('latest-answer-keys');
+            answerKeysList.innerHTML = '';
+            
+            if (!data.answer_keys || data.answer_keys.length === 0) {
+                answerKeysList.innerHTML = '<li class="list-group-item text-center">No answer keys available</li>';
+                return;
+            }
+            
+            // Display the latest 10 answer keys
+            const latestAnswerKeys = data.answer_keys.slice(0, 10);
+            latestAnswerKeys.forEach(answerKey => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${answerKey.title}</h6>
+                            <small class="text-muted">Published: ${answerKey.date_published || 'N/A'}</small>
+                        </div>
+                        <a href="${answerKey.link}" target="_blank" class="btn btn-sm btn-outline-primary">Download</a>
+                    </div>
+                `;
+                answerKeysList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading answer keys:', error);
+            document.getElementById('latest-answer-keys').innerHTML = '<li class="list-group-item text-center text-danger">Error loading answer keys</li>';
+        });
+}
+
+// Function to load latest syllabus
+function loadLatestSyllabus() {
+    fetch('/api/syllabus')
+        .then(response => response.json())
+        .then(data => {
+            const syllabusList = document.getElementById('latest-syllabus');
+            syllabusList.innerHTML = '';
+            
+            if (!data.syllabus || data.syllabus.length === 0) {
+                syllabusList.innerHTML = '<li class="list-group-item text-center">No syllabus available</li>';
+                return;
+            }
+            
+            // Display the latest 10 syllabus
+            const latestSyllabus = data.syllabus.slice(0, 10);
+            latestSyllabus.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">${item.title}</h6>
+                            <small class="text-muted">Published: ${item.date_published || 'N/A'}</small>
+                        </div>
+                        <a href="${item.link}" target="_blank" class="btn btn-sm btn-outline-primary">Download</a>
+                    </div>
+                `;
+                syllabusList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading syllabus:', error);
+            document.getElementById('latest-syllabus').innerHTML = '<li class="list-group-item text-center text-danger">Error loading syllabus</li>';
+        });
+}
+
+// Function to load important links
+function loadImportantLinks() {
+    fetch('/api/important-links')
+        .then(response => response.json())
+        .then(links => {
+            const governmentLinks = document.getElementById('government-links');
+            const studyLinks = document.getElementById('study-links');
+            
+            governmentLinks.innerHTML = '';
+            studyLinks.innerHTML = '';
+            
+            links.forEach(link => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item';
+                li.innerHTML = `
+                    <a href="${link.url}" target="_blank" class="text-decoration-none">
+                        <i class="fas fa-external-link-alt me-2"></i>${link.title}
+                    </a>
+                `;
+                
+                if (link.category === 'government') {
+                    governmentLinks.appendChild(li);
+                } else {
+                    studyLinks.appendChild(li);
+                }
+            });
+            
+            // Add "No links available" message if no links in a category
+            if (governmentLinks.children.length === 0) {
+                governmentLinks.innerHTML = '<li class="list-group-item text-center text-muted">No government websites available</li>';
+            }
+            if (studyLinks.children.length === 0) {
+                studyLinks.innerHTML = '<li class="list-group-item text-center text-muted">No study resources available</li>';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading important links:', error);
+            document.getElementById('government-links').innerHTML = '<li class="list-group-item text-center text-danger">Error loading government websites</li>';
+            document.getElementById('study-links').innerHTML = '<li class="list-group-item text-center text-danger">Error loading study resources</li>';
+        });
+}
+
+// Load all data when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadLatestJobs();
+    loadLatestAdmitCards();
+    loadLatestResults();
+    loadLatestAnswerKeys();
+    loadLatestSyllabus();
+    loadImportantLinks();
+});
+</script>
+{% endblock %}

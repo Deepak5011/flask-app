@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">{{ job.title }}</h2>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>Basic Information</h4>
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Category</th>
+                            <td>{{ job.category or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Eligibility</th>
+                            <td>{{ job.eligibility or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Vacancy</th>
+                            <td>{{ job.total_vacancy or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Exam Fee</th>
+                            <td>{{ job.exam_fee or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Start Date to Apply</th>
+                            <td>{{ job.start_date_to_apply or 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Date to Apply</th>
+                            <td>{{ job.last_date_to_apply or 'N/A' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h4>Additional Details</h4>
+                <table class="table table-bordered">
+                    <tbody>
+                        {% if job.age_limit %}
+                        <tr>
+                            <th>Age Limit</th>
+                            <td>{{ job.age_limit or 'N/A' }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if job.exam_date %}
+                        <tr>
+                            <th>Exam Date</th>
+                            <td>{{ job.exam_date or 'N/A' }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if job.application_fee %}
+                        <tr>
+                            <th>Application Fee</th>
+                            <td>{{ job.application_fee or 'N/A' }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if job.selection_process %}
+                        <tr>
+                            <th>Selection Process</th>
+                            <td>{{ job.selection_process or 'N/A' }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if job.posted_date %}
+                        <tr>
+                            <th>Posted Date</th>
+                            <td>{{ job.posted_date or 'N/A' }}</td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="mt-4">
+            <h4>Job Description</h4>
+            <div class="card">
+                <div class="card-body">
+                    <p>{{ job.description }}</p>
+                </div>
+            </div>
+        </div>
+        
+        {% if job.requirements %}
+        <div class="mt-4">
+            <h4>Requirements</h4>
+            <div class="card">
+                <div class="card-body">
+                    <p>{{ job.requirements }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if job.important_dates %}
+        <div class="mt-4">
+            <h4>Important Dates</h4>
+            <div class="card">
+                <div class="card-body">
+                    <p>{{ job.important_dates }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="mt-4">
+            <a href="{{ job.apply_link }}" class="btn btn-success" target="_blank">Apply Now</a>
+            <a href="/jobs" class="btn btn-outline-primary">Back to Jobs</a>
+            {% if job.notification_link %}
+            <a href="{{ job.notification_link }}" class="btn btn-outline-info" target="_blank">View Official Notification</a>
+            {% endif %}
+            {% if job.pyq_link %}
+            <a href="{{ job.pyq_link }}" class="btn btn-outline-secondary" target="_blank"><i class="fas fa-file-pdf me-1"></i>Download PYQ</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+body { background-color: #f8f9fa; }
+.navbar-brand { font-weight: bold; }
+.footer { background: #e9ecef; }
+.card { margin-bottom: 1.5rem; }
+.section-title { margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; font-weight: 600; }
+.pagination { justify-content: center; }
+@media (max-width: 576px) {
+  .navbar-nav { text-align: center; }
+  .section-title { font-size: 1.2rem; }
+}

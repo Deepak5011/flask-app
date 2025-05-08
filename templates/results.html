@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="section-title">Exam Results</h2>
+<div class="row">
+    {% for result in results %}
+    <div class="col-md-12">
+        <div class="card mb-3">
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title mb-1">{{ result.title }}</h5>
+                    <p class="mb-0">Published: {{ result.date_published }}</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="{{ result.link }}" class="btn btn-primary" target="_blank">View Result</a>
+                    {% if result.pdf_link %}
+                    <a href="{{ result.pdf_link }}" class="btn btn-secondary" target="_blank">
+                        <i class="fas fa-file-pdf"></i> Download PDF
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        {% if page > 1 %}
+        <li class="page-item"><a class="page-link" href="?page={{ page-1 }}&limit={{ limit }}">Previous</a></li>
+        {% endif %}
+        {% for p in range(1, total_pages+1) %}
+        <li class="page-item {% if p == page %}active{% endif %}"><a class="page-link" href="?page={{ p }}&limit={{ limit }}">{{ p }}</a></li>
+        {% endfor %}
+        {% if page < total_pages %}
+        <li class="page-item"><a class="page-link" href="?page={{ page+1 }}&limit={{ limit }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% if not results %}
+<div class="alert alert-warning">No results found.</div>
+{% endif %}
+{% endblock %}

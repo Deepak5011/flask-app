@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Important Links - Job Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Important Links</h1>
+    
+    {% if links %}
+    <div class="list-group">
+        {% for link in links %}
+        <a href="{{ link.url }}" class="list-group-item list-group-item-action" target="_blank">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ link.title }}</h5>
+                <!-- <small>{{ link.category }}</small> -->
+            </div>
+            <p class="mb-1">{{ link.url }}</p>
+        </a>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No important links available at the moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

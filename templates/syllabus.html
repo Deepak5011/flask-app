@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Syllabus - SarkariResult Clone{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Syllabus</h2>
+    
+    <!-- Search Form -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="{{ url_for('syllabus') }}" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search syllabus..." value="{{ query }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Syllabus List -->
+    <div class="row">
+        {% for syllabus in syllabus_list %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ syllabus.title }}</h5>
+                    <p class="card-text">
+                        <small class="text-muted">Published: {{ syllabus.date_published }}</small>
+                    </p>
+                    <a href="{{ syllabus.link }}" class="btn btn-primary" target="_blank">View Syllabus</a>
+                    {% if syllabus.pdf_link %}
+                    <a href="{{ syllabus.pdf_link }}" class="btn btn-secondary ms-2" target="_blank">Download PDF</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No syllabus found.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if total_pages > 1 %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if current_page > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('syllabus', page=current_page-1, q=query) }}">Previous</a>
+            </li>
+            {% endif %}
+            
+            {% for page in range(1, total_pages + 1) %}
+            <li class="page-item {% if page == current_page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('syllabus', page=page, q=query) }}">{{ page }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if current_page < total_pages %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('syllabus', page=current_page+1, q=query) }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %} 
